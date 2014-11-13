@@ -1,5 +1,5 @@
 <body>
-<H4> Register a class to be recorded </H4>
+<H4> Register a class to be recorded</H4>
 	<form method="post">
 		<label for="username"> Username: </label>
 			<input required name="username" 
