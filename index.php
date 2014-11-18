@@ -46,14 +46,14 @@
 						<select id="course/">');
 				
 				for($i = 0; $i < count($courses)-1; $i+=1){
-					$course = $courses[i];
-					echo('<option value=$course>$course</option>');
+					$course = $courses[$i];
+					echo('<option value={$course}>{$course}</option>');
 				} 
 			
 				echo('	</select>	
 						</br></br>
 						<input type="submit"/>
-					 </form>;');
+					 </form>');
 			}
 			ldap_close($ds);
 		}
