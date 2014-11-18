@@ -49,12 +49,7 @@
         }
         echo "</pre>";
 
-
-
     	ldap_close($ds);
-     
-			$response = 
-			echo $response;
 		}
 	?>
 </body>
