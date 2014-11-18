@@ -47,7 +47,7 @@
 				
 				for($i = 0; $i < count($courses)-1; $i+=1){
 					$course = $courses[$i];
-					echo('<option value={$course}>{$course}</option>');
+					echo("<option value=$course>$course</option>");
 				} 
 			
 				echo('	</select>	
