@@ -41,18 +41,19 @@
 			}
 			else{
 				$courses = $info[0]['courseinstructorof'];
-				echo '<form method="post">
+				echo('<form method="post">
 						<label for="course"> Course: </label>
-						<select id="course/">';
+						<select id="course/">');
+				
 				for($i = 0; $i < count($courses)-1; $i+=1){
 					$course = $courses[i];
-					echo '<option value=$course>$course</option>'
+					echo('<option value=$course>$course</option>');
 				} 
 			
-				echo '	</select>	
+				echo('	</select>	
 						</br></br>
 						<input type="submit"/>
-					 </form>;';
+					 </form>;');
 			}
 			ldap_close($ds);
 		}
