@@ -44,7 +44,7 @@
 				$courseQuerySuccess = True;
 				echo('<form method="post">
 						<label for="course"> Course: </label>
-						<select id="course/">');
+						<select name="course" id="course/">');
 				
 				for($i = 0; $i < count($courses)-1; $i+=1){
 					$course = $courses[$i];
