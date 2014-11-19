@@ -93,7 +93,7 @@
 				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
 				foreach($folders as $folder)
 				{
-					echo "<pre>";print_r($folder["Name"]);echo "</pre>";
+					echo "<pre>";print_r($folder->Name);echo "</pre>";
 				}
 				echo "<pre>";print_r("folders listed.");echo "</pre>";
 			}
