@@ -73,29 +73,19 @@
 			$RRMClient = new RemoteRecorderManagementClient($server, $auth);
 			$SMClient = new SessionManagementClient($server, $auth);
 
-			/*try
-			{
-				$folderAccessDetailsResponse = $AMClient->getFolderAccessDetails("a7ed969e-be1d-402d-9a6b-36d637c3cc18");
-				$folderAccessDetails = $folderAccessDetailsResponse->getFolderAccessDetails();
-				echo "<pre>";print_r($folderAccessDetails);echo "</pre>";
-				foreach($folderAccessDetails->UsersWithCreatorAccess->getGuids() as $guid)
-				{
-					 echo "<pre>";print_r($guid);echo "</pre>";
-				}
-			}
-			catch(Exception $e)
-			{
-				echo "ERROR: ".$e->getMessage();
-			}*/
-
 			try
 			{
 				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
 				foreach($folders as $folder)
 				{
-					echo "<pre>";print_r($folder->Name);echo "</pre>";
+					if(isset($_POST['course']) == $folder->Name){
+						echo "<pre>";print_r($folder->Name);echo "</pre>";
+						echo "<pre>";print_r("Folder found!");echo "</pre>";
+						exit();
+					}
 				}
-				echo "<pre>";print_r("folders listed.");echo "</pre>";
+				
+				echo "<pre>";print_r("No folder for course found");echo "</pre>";
 			}
 			catch(Exception $e)
 			{
