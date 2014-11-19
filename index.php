@@ -61,7 +61,7 @@
 		}
 		
 		if($courseQuerySuccess){
-			require_once(dirname(__FILE__)."/includes/DataObjects/Objects/AuthenticationInfo.php");
+			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
 			require_once(dirname(__FILE__)."/includes/client/impl/AccessManagementClient.php");
 			require_once(dirname(__FILE__)."/includes/client/impl/RemoteRecorderManagementClient.php");
 			require_once(dirname(__FILE__)."/includes/client/impl/SessionManagementClient.php");
