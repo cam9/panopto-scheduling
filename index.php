@@ -68,7 +68,7 @@
 			date_default_timezone_set("Europe/London");
 
 			$server = "bc.hosted.panopto.com";
-			$auth = new AuthenticationInfo("walkerjj","bailer720",null);
+			$auth = new AuthenticationInfo("walkerjj@bc.edu","bailer720",null);
 			$AMClient = new AccessManagementClient($server, $auth);
 			$RRMClient = new RemoteRecorderManagementClient($server, $auth);
 			$SMClient = new SessionManagementClient($server, $auth);
@@ -95,6 +95,7 @@
 				{
 					echo "<pre>";print_r($folder);echo "</pre>";
 				}
+				echo "<pre>";print_r("folders listed.");echo "</pre>";
 			}
 			catch(Exception $e)
 			{
