@@ -10,7 +10,6 @@
 	</form>
 	</br></br>
 	<?php
-		$courseQuerySuccess = False;
 	
 		if (isset($_POST['username']) && !empty($_POST['username'])) {  
 			$server='directory.bc.edu';
@@ -60,7 +59,7 @@
 			ldap_close($ds);
 		}
 		
-		if($courseQuerySuccess){
+		if(isset($_POST['username'])){
 			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
 			require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
 			require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
