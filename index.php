@@ -78,7 +78,7 @@
 				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
 				foreach($folders as $folder)
 				{
-					if( strcmp($_POST['course']), $folder->Name) == 0){
+					if( strcmp($_POST['course'], $folder->Name) == 0){
 						echo "<pre>";print_r($folder->Name);echo "</pre>";
 						echo "<pre>";print_r("Folder found!");echo "</pre>";
 						exit();
