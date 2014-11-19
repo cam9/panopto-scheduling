@@ -10,6 +10,7 @@
 	</form>
 	</br></br>
 	<?php
+		$courseQuerySuccess = False;
 	
 		if (isset($_POST['username']) && !empty($_POST['username'])) {  
 			$server='directory.bc.edu';
@@ -41,6 +42,7 @@
 			}
 			else{
 				$courses = $info[0]['courseinstructorof'];
+				$courseQuerySuccess = True;
 				echo('<form method="post">
 						<label for="course"> Course: </label>
 						<select id="course/">');
@@ -56,6 +58,49 @@
 					 </form>');
 			}
 			ldap_close($ds);
+		}
+		
+		if($courseQuerySuccess){
+			require_once(dirname(__FILE__)."/includes/DataObjects/Objects/AuthenticationInfo.php");
+			require_once(dirname(__FILE__)."/includes/client/impl/AccessManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/client/impl/RemoteRecorderManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/client/impl/SessionManagementClient.php");
+			error_reporting(E_ALL);
+			date_default_timezone_set("Europe/London");
+
+			$server = "bc.hosted.panopto.com";
+			$auth = new AuthenticationInfo("walkerjj","bailer720",null);
+			$AMClient = new AccessManagementClient($server, $auth);
+			$RRMClient = new RemoteRecorderManagementClient($server, $auth);
+			$SMClient = new SessionManagementClient($server, $auth);
+
+			/*try
+			{
+				$folderAccessDetailsResponse = $AMClient->getFolderAccessDetails("a7ed969e-be1d-402d-9a6b-36d637c3cc18");
+				$folderAccessDetails = $folderAccessDetailsResponse->getFolderAccessDetails();
+				echo "<pre>";print_r($folderAccessDetails);echo "</pre>";
+				foreach($folderAccessDetails->UsersWithCreatorAccess->getGuids() as $guid)
+				{
+					 echo "<pre>";print_r($guid);echo "</pre>";
+				}
+			}
+			catch(Exception $e)
+			{
+				echo "ERROR: ".$e->getMessage();
+			}*/
+
+			try
+			{
+				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
+				foreach($folders as $folder)
+				{
+					echo "<pre>";print_r($folder);echo "</pre>";
+				}
+			}
+			catch(Exception $e)
+			{
+				echo "ERROR: ".$e->getMessage();
+			}
 		}
 	?>
 </body>
