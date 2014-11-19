@@ -59,7 +59,7 @@
 			ldap_close($ds);
 		}
 		
-		if(isset($_POST['username'])){
+		if(isset($_POST['course'])){
 			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
 			require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
 			require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
