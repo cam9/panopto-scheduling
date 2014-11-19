@@ -10,6 +10,18 @@
 	</form>
 	</br></br>
 	<?php
+		require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
+		require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
+		require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
+		require_once(dirname(__FILE__)."/includes/impl/4.2/client/SessionManagementClient.php");
+		error_reporting(E_ALL);
+		date_default_timezone_set("Europe/London");
+
+		$server = "bc.hosted.panopto.com";
+		$auth = new AuthenticationInfo("walkerjj@bc.edu","bailer720",null);
+		$AMClient = new AccessManagementClient($server, $auth);
+		$RRMClient = new RemoteRecorderManagementClient($server, $auth);
+		$SMClient = new SessionManagementClient($server, $auth);
 	
 		if (isset($_POST['username']) && !empty($_POST['username'])) {  
 			$server='directory.bc.edu';
@@ -60,25 +72,14 @@
 		}
 		
 		if(isset($_POST['course'])){
-			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
-			require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
-			require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
-			require_once(dirname(__FILE__)."/includes/impl/4.2/client/SessionManagementClient.php");
-			error_reporting(E_ALL);
-			date_default_timezone_set("Europe/London");
-
-			$server = "bc.hosted.panopto.com";
-			$auth = new AuthenticationInfo("walkerjj@bc.edu","bailer720",null);
-			$AMClient = new AccessManagementClient($server, $auth);
-			$RRMClient = new RemoteRecorderManagementClient($server, $auth);
-			$SMClient = new SessionManagementClient($server, $auth);
 
 			try
 			{
 				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
 				foreach($folders as $folder)
 				{
-					if( strcmp($_POST['course'], $folder->Name) == 0){
+					if( strcmp($_POST['course'], $folder->Name) == 0)
+					{
 						echo "<pre>";print_r($folder->Name);echo "</pre>";
 						echo "<pre>";print_r("Folder found!");echo "</pre>";
 						exit();
@@ -86,11 +87,30 @@
 				}
 				
 				echo "<pre>";print_r("No folder for course found");echo "</pre>";
+				echo('<form method="post">
+						<input type="hidden" value="' . htmlspecialchars($_POST['course']) .'" name="folderName"/>
+						<input value="Make new folder" name="makeNew" type="submit"/>
+					 </form>');
 			}
 			catch(Exception $e)
 			{
 				echo "ERROR: ".$e->getMessage();
 			}
+		}
+		
+		if(isset($_POST['makeNew'])){
+			$folder = new Folder();
+			try
+			{
+				$folder = $SMClient->addFolder($_POST['folderName'])->getFolder();
+				echo "<pre>";print_r($folder);echo "</pre>";
+			}
+			catch(Exception $e)
+			{
+				echo $e->getMessage();
+			}
+			exit();
+
 		}
 	?>
 </body>
