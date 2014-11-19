@@ -62,9 +62,9 @@
 		
 		if($courseQuerySuccess){
 			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
-			require_once(dirname(__FILE__)."/includes/impl/client/4.2/AccessManagementClient.php");
-			require_once(dirname(__FILE__)."/includes/impl/client/4.2/RemoteRecorderManagementClient.php");
-			require_once(dirname(__FILE__)."/includes/impl/client/4.2/SessionManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/SessionManagementClient.php");
 			error_reporting(E_ALL);
 			date_default_timezone_set("Europe/London");
 
