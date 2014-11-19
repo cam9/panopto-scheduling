@@ -41,9 +41,10 @@
 			}
 			else{
 				$courses = $info[0]['courseinstructorof'];
+				$courseQuerySuccess = True;
 				echo('<form method="post">
 						<label for="course"> Course: </label>
-						<select id="course/">');
+						<select name="course" id="course/">');
 				
 				for($i = 0; $i < count($courses)-1; $i+=1){
 					$course = $courses[$i];
@@ -56,6 +57,40 @@
 					 </form>');
 			}
 			ldap_close($ds);
+		}
+		
+		if(isset($_POST['course'])){
+			require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
+			require_once(dirname(__FILE__)."/includes/impl/4.2/client/SessionManagementClient.php");
+			error_reporting(E_ALL);
+			date_default_timezone_set("Europe/London");
+
+			$server = "bc.hosted.panopto.com";
+			$auth = new AuthenticationInfo("walkerjj@bc.edu","bailer720",null);
+			$AMClient = new AccessManagementClient($server, $auth);
+			$RRMClient = new RemoteRecorderManagementClient($server, $auth);
+			$SMClient = new SessionManagementClient($server, $auth);
+
+			try
+			{
+				$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
+				foreach($folders as $folder)
+				{
+					if( strcmp($_POST['course'], $folder->Name) == 0){
+						echo "<pre>";print_r($folder->Name);echo "</pre>";
+						echo "<pre>";print_r("Folder found!");echo "</pre>";
+						exit();
+					}
+				}
+				
+				echo "<pre>";print_r("No folder for course found");echo "</pre>";
+			}
+			catch(Exception $e)
+			{
+				echo "ERROR: ".$e->getMessage();
+			}
 		}
 	?>
 </body>
