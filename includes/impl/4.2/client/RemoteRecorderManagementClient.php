@@ -101,7 +101,8 @@ class RemoteRecorderManagementClient extends AbstractPanoptoClient
      */
     public function scheduleRecurringRecording($scheduledSessionId, $daysOfWeek, $end, $addOriginalId = false)
     {
-        return new ScheduleRecurringRecordingResponse($this->client->ScheduleRecuringRecording(new ScheduleRecurringRecording($this->auth, $scheduledSessionId, $daysOfWeek, $end)),$addOriginalId?$scheduledSessionId:null);
+        //return new ScheduleRecurringRecordingResponse($this->client->ScheduleRecuringRecording(new ScheduleRecurringRecording($this->auth, $scheduledSessionId, $daysOfWeek, $end)),$addOriginalId?$scheduledSessionId:null);
+        return $this->client->ScheduleRecurringRecording(new ScheduleRecurringRecording($this->auth, $scheduledSessionId, $daysOfWeek, $end));
     }
     
     /**
