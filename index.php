@@ -18,10 +18,11 @@
 		date_default_timezone_set("Europe/London");
 
 		$server = "bc.hosted.panopto.com";
-		$auth = new AuthenticationInfo("walkerjj@bc.edu","bailer720",null);
+		$auth = new AuthenticationInfo("walkerjj@bc.edu","panoptopass",null);
 		$AMClient = new AccessManagementClient($server, $auth);
 		$RRMClient = new RemoteRecorderManagementClient($server, $auth);
 		$SMClient = new SessionManagementClient($server, $auth);
+	
 	
 		if (isset($_POST['username']) && !empty($_POST['username'])) {  
 			$server='directory.bc.edu';
@@ -80,8 +81,49 @@
 				{
 					if( strcmp($_POST['course'], $folder->Name) == 0)
 					{
-						echo "<pre>";print_r($folder->Name);echo "</pre>";
-						echo "<pre>";print_r("Folder found!");echo "</pre>";
+						echo "Folder Found!";
+						try
+						{
+							
+							 $startDateAndTime = new DateTime();
+							 $startDateAndTime->setDate(2014, 12, 5);
+							 $startDateAndTime->setTime(09, 00, 00);
+							 $startDateAndTime = $startDateAndTime->format("Y-m-d\TH:i:s");
+							 
+							 $endDateAndTime = new DateTime();
+							 $endDateAndTime->setDate(2014, 12, 5);
+							 $endDateAndTime->setTime(10, 00, 00);
+							 $endDateAndTime = $endDateAndTime->format("Y-m-d\TH:i:s");
+							 
+							 $endDateAndTimeOfRecurrence = new DateTime();
+							 $endDateAndTimeOfRecurrence->setDate(2014, 12, 30);
+							 $endDateAndTimeOfRecurrence->setTime(20, 55, 00);
+							 $endDateAndTimeOfRecurrence = $endDateAndTimeOfRecurrence->format("Y-m-d\TH:i:s");
+
+							 $repeatingDaysOfWeek = array();
+							 $repeatingDaysOfWeek[] = DayOfWeek::Monday;
+							 $recorderSettings = array();
+							  //Schedule a recording in HERB.G. CA
+							 $recorderSettings[] = new RecorderSettings("a0669e1f-4c9a-4b16-8106-5510ed2f8bf6", false, true);
+							 
+							 echo "before network call<br>";
+							 $guids = $RRMClient->scheduleNewRecurringRecording(
+								"TestRecurrance", 
+								$folder->Id, 
+								$startDateAndTime,
+								 $endDateAndTime, 
+								 $repeatingDaysOfWeek, 
+								 $endDateAndTimeOfRecurrence, 
+								 $recorderSettings
+							);
+							echo "Success!";
+							echo "<pre>";print_r($guids);echo "</pre>";
+						}
+						 catch(Exception $e)
+						 {
+						 	 echo "error";
+							 echo $e->getMessage();
+						 }
 						exit();
 					}
 				}
@@ -112,5 +154,8 @@
 			exit();
 
 		}
+		
+		
+		
 	?>
 </body>
