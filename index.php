@@ -9,7 +9,7 @@
 		<input type="submit"/>
 	</form>
 	</br></br>
-	<?php
+	<?php			 
 		require_once(dirname(__FILE__)."/includes/dataObjects/objects/AuthenticationInfo.php");
 		require_once(dirname(__FILE__)."/includes/impl/4.2/client/AccessManagementClient.php");
 		require_once(dirname(__FILE__)."/includes/impl/4.2/client/RemoteRecorderManagementClient.php");
@@ -27,7 +27,7 @@
 		if (isset($_POST['username']) && !empty($_POST['username'])) {  
 			$server='directory.bc.edu';
 			$admin='uid=adminides,ou=applicationadmins,dc=bc,dc=edu';
-			$passwd='rece55i0n';
+			$passwd='R0ckR0ll';
 			$bcid = $_POST['username'];
 			$ds=ldap_connect($server);  // assuming the LDAP server is on this host
 
@@ -84,38 +84,8 @@
 						echo "Folder Found!";
 						try
 						{
-							
-							 $startDateAndTime = new DateTime();
-							 $startDateAndTime->setDate(2014, 12, 5);
-							 $startDateAndTime->setTime(09, 00, 00);
-							 $startDateAndTime = $startDateAndTime->format("Y-m-d\TH:i:s");
-							 
-							 $endDateAndTime = new DateTime();
-							 $endDateAndTime->setDate(2014, 12, 5);
-							 $endDateAndTime->setTime(10, 00, 00);
-							 $endDateAndTime = $endDateAndTime->format("Y-m-d\TH:i:s");
-							 
-							 $endDateAndTimeOfRecurrence = new DateTime();
-							 $endDateAndTimeOfRecurrence->setDate(2014, 12, 30);
-							 $endDateAndTimeOfRecurrence->setTime(20, 55, 00);
-							 $endDateAndTimeOfRecurrence = $endDateAndTimeOfRecurrence->format("Y-m-d\TH:i:s");
 
-							 $repeatingDaysOfWeek = array();
-							 $repeatingDaysOfWeek[] = DayOfWeek::Monday;
-							 $recorderSettings = array();
-							  //Schedule a recording in HERB.G. CA
-							 $recorderSettings[] = new RecorderSettings("a0669e1f-4c9a-4b16-8106-5510ed2f8bf6", false, true);
 							 
-							 echo "before network call<br>";
-							 $guids = $RRMClient->scheduleNewRecurringRecording(
-								"TestRecurrance", 
-								$folder->Id, 
-								$startDateAndTime,
-								 $endDateAndTime, 
-								 $repeatingDaysOfWeek, 
-								 $endDateAndTimeOfRecurrence, 
-								 $recorderSettings
-							);
 							echo "Success!";
 							echo "<pre>";print_r($guids);echo "</pre>";
 						}
