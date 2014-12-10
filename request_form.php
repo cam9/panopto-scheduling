@@ -76,7 +76,7 @@
 		
 		<label for="days[]"> Days of Week -control(Windows) or command(Mac) click to select multiple: </label>
 			<br>
-			<select multiple name="days[]">
+			<select required multiple name="days[]">
 			  <option value="monday">Monday</option>
 			  <option value="tuesday">Tuesday</option>
 			  <option value="wednesday">Wednesday</option>
