@@ -35,7 +35,7 @@
 
 <body>
 <H4> Register a class to be recorded</H4>
-	<form method="post">
+	<form action="/record.php" method="post">
 	
 		<label for="course"> Course code: </label>
 			<br>
@@ -56,6 +56,9 @@
 			</select>
 		<br><br>
 		
+		<label> All date-times in "YYYY-mm-ddTH:i:s" format please where T is the letter T</label>
+		<br><br>
+		
 		<label for="start"> Start Time: </label>
 			<br>
 			<input required name="start"/>
@@ -71,9 +74,9 @@
 			<input required name="endR"/>
 		<br><br>	
 		
-		<label for="days"> Days of Week: </label>
+		<label for="days[]"> Days of Week: </label>
 			<br>
-			<select multiple name="days">
+			<select multiple name="days[]">
 			  <option value="monday">Monday</option>
 			  <option value="tuesday">Tuesday</option>
 			  <option value="wednesday">Wednesday</option>
