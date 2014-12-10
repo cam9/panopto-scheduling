@@ -61,20 +61,20 @@
 		
 		<label for="start"> Start Time: </label>
 			<br>
-			<input required name="start"/>
+			<input required name="start" value="2014-12-25T20:00:00"/>
 		<br><br>
 		
 		<label for="end"> End Time: </label>
 			<br>
-			<input required name="end"/>
+			<input required name="end" value="2014-12-25T22:00:00"/>
 		<br><br>
 		
 		<label for="endR"> From now until: </label>
 			<br>
-			<input required name="endR"/>
+			<input required name="endR" value="2015-01-25T20:00:00"/>
 		<br><br>	
 		
-		<label for="days[]"> Days of Week: </label>
+		<label for="days[]"> Days of Week -control(Windows) or command(Mac) click to select multiple: </label>
 			<br>
 			<select multiple name="days[]">
 			  <option value="monday">Monday</option>

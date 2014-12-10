@@ -20,7 +20,6 @@
 		{
 			if( strcmp($_POST['course'], $folder->Name) == 0)
 			{
-				echo "Folder Found!";
 				$folderID = $folder->Id;
 				break;
 			}
@@ -63,7 +62,6 @@
 				
 			}
 		}
-		print_r( $repeatingDaysOfWeek  );
 		
 		$recorderSettings = array();
 		$recorderSettings[] = new RecorderSettings($_POST['recorder'], false, true);
