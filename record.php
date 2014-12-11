@@ -15,16 +15,18 @@
 	try
 	{
 		$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
-		$folderID = false;
+		$folderID;
+		$noFolder = true;
 		foreach($folders as $folder)
 		{
 			if( strcmp($_POST['course'], $folder->Name) == 0)
 			{
+				$noFolder = false;
 				$folderID = $folder->Id;
 				break;
 			}
 		}
-		if($folderID == false){
+		if($noFolder){
 			$folder = $SMClient->addFolder($_POST['course'])->getFolder();
 			$folderID = $folder->Id;
 			echo "Folder made for you";
