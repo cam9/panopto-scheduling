@@ -67,7 +67,7 @@
 		$recorderSettings[] = new RecorderSettings($_POST['recorder'], false, true);
 
 		$guids = $RRMClient->scheduleNewRecurringRecording(
-			"TestRecurrance", 
+			$_POST['course'], 
 			$folder->Id, 
 			$startDateAndTime,
 			$endDateAndTime, 
