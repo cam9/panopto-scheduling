@@ -15,7 +15,7 @@
 	try
 	{
 		$folders = $SMClient->getFoldersList(new ListFoldersRequest(new Pagination(200,null), null, false, "Name", false))->getFolders();
-		$folderID = "";
+		$folderID = false;
 		foreach($folders as $folder)
 		{
 			if( strcmp($_POST['course'], $folder->Name) == 0)
@@ -24,8 +24,8 @@
 				break;
 			}
 		}
-		if($folderID == ""){
-			$folder = $SMClient->addFolder($_POST['folderName'])->getFolder();
+		if($folderID == false){
+			$folder = $SMClient->addFolder($_POST['course'])->getFolder();
 			$folderID = $folder->Id;
 			echo "Folder made for you";
 		}
@@ -68,7 +68,7 @@
 
 		$guids = $RRMClient->scheduleNewRecurringRecording(
 			$_POST['course'], 
-			$folder->Id, 
+			$folderID, 
 			$startDateAndTime,
 			$endDateAndTime, 
 			$repeatingDaysOfWeek, 
