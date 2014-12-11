@@ -35,7 +35,7 @@
 
 <body>
 <H4> Register a class to be recorded</H4>
-	<form action="/record.php" method="post">
+	<form action="record.php" method="post">
 	
 		<label for="course"> Course code: </label>
 			<br>
