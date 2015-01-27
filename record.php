@@ -8,8 +8,9 @@
 	error_reporting(E_ALL);
 	date_default_timezone_set("America/New_York");
 
-	$server = "bc.hosted.panopto.com";
+	$server = $configs['panopto-host'];
 	$auth = new AuthenticationInfo($configs['panopto-user'],$configs['panopto-pass'],null);
+	
 	$AMClient = new AccessManagementClient($server, $auth);
 	$RRMClient = new RemoteRecorderManagementClient($server, $auth);
 	$SMClient = new SessionManagementClient($server, $auth);
