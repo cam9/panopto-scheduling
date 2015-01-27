@@ -1,7 +1,9 @@
 <?php
-	$server='directory.bc.edu';
-	$admin='uid=adminides,ou=applicationadmins,dc=bc,dc=edu';
-	$passwd='R0ckR0ll';
+	$configs = include('config.php');
+	
+	$server=$configs['ldap-host'];
+	$admin=$configs['ldap-admin'];
+	$passwd=$configs['ldap-pass'];
 	$bcid = $_POST['username'];
 	$ds=ldap_connect($server);  // assuming the LDAP server is on this host
 
@@ -9,13 +11,13 @@
 			// bind with appropriate dn to give update access
 			$r=ldap_bind($ds, $admin, $passwd);
 			if(!$r) {
-				echo("<p>Unable to connect to directory.bc.edu: ldap_bind failed</p>");
+				echo("<p>Unable to connect to host: ldap_bind failed</p>");
 				ldap_close($ds);
 				exit();
 			}
 	} 
 	else {
-			echo "<p>Unable to connect to directory.bc.edu: ldap_connect() false</p>";
+			echo "<p>Unable to connect to host: ldap_connect() false</p>";
 			ldap_close($ds);
 			exit();
 	}
